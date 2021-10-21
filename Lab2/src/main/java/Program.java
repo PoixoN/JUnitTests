@@ -4,7 +4,7 @@ public class Program {
         Person tom = new Person();
         tom.displayInfo();
 
-        tom.name = "Tom";
+        tom.name = "Andrjey";
         tom.age = 34;
         tom.displayInfo();
     }

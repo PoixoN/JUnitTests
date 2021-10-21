@@ -1,95 +1,56 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.endsWith;
-import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.testng.Assert.*;
 import org.testng.annotations.DataProvider;
 
-@RunWith(Parameterized.class)
+
 public class PersonTest {
-    @Parameterized.Parameters
-    public static Collection<Object[]> getParameters()
-    {
-        return Arrays.asList(new Object[][] {{"Artem","Kasprukov",27, "ArtemKasprukov"},{"Lubomyr","Maevskiy",44, "LubomyrMaevskiy"}});
+
+    public static Person pers = new Person();
+
+    @DataProvider(name = "test")
+    public static Object[][] getParameters(){
+        return new Object[][] {{"Artem","Kasprukov",27, "ArtemKasprukov"},{"Lubomyr","Maevskiy",44, "LubomyrMaevskiy"}};
     }
 
-    private int age;
-    private String name;
-    private String surname;
-    private String ns;
-
-    public PersonTest(String name, String surname, int age, String ns)
-    {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.ns = ns;
-    }
-
-    public static Person person;
-
-    @Test
+    @Test (groups = {"group1"})
     public void test1() {
-        assertNotNull(person);
+        assertNotNull(pers);
         System.out.println("=======================Test 1=======================");
     }
-    @Test
+    @Test (groups = {"group2"})
     public void test2() {
-        assertNull(person.surname);
+        assertNull(pers.surname);
         System.out.println("=======================Test 2=======================");
     }
-    @Test
+    @Test (groups = {"group1", "group2"})
     public void test3() {
-        person.newAge();
-        assertEquals(person.age,22);
+        pers.newAge();
+        assertEquals(pers.age,22);
         System.out.println("=======================Test 3=======================");
     }
-    @Test
+    @Test (groups = {"group2"})
     public void test4() {
-        assertFalse(person.Name("Dina"));
+        assertFalse(pers.Name("Dina"));
         System.out.println("=======================Test 4=======================");
     }
 
-    @Test // параметризированный
-    public void test5()
+    @Test(dataProvider = "test", groups = {"group1"})
+    public void test5(String name, String surname, Integer age, String ns)
     {
-        assertThat(person.NameSurname(name,surname), is(ns));
+        Assert.assertEquals(pers.NameSurname(name,surname), (ns));
         System.out.println("=======================Test 5=======================");
     }
 
-    @Test //hamcrest
-    public void test6(){
-        assertThat(person.surname, equalTo(null));
-        System.out.println("=======================Test 6=======================");
-    }
-
-    @Test // hamcrest
-    public void test7(){
-        assertThat(person.NewName(), endsWith("bin"));
-        System.out.println("=======================Test 7=======================");
-    }
-
+    @Test (groups = {"group1", "group2"})
     @BeforeClass
     public static void setUpClass() {
-        person = new Person();
-        person.name="Maevskiy";
-        person.displayInfo();
-        System.out.println("=======================@BeforeClass=======================");
-    }
-
-    @Before
-    public void setUp() {
-        person.setAge(38);
-        person.displayInfo();
+        pers.name="Maevskiy";
+        pers.displayInfo();
         System.out.println("=======================@Before=======================");
     }
 }

@@ -19,7 +19,7 @@ public class PersonTest {
     @Parameterized.Parameters
     public static Collection<Object[]> getParameters()
     {
-        return Arrays.asList(new Object[][] {{"Artem","Sasha",27, "ArtemSasha"},{"Lubomyr","Ihor",44, "LubomyrIhor"}});
+        return Arrays.asList(new Object[][] {{"Artem","Kasprukov",27, "ArtemKasprukov"},{"Lubomyr","Maevskiy",44, "LubomyrMaevskiy"}});
     }
 
     private int age;
@@ -74,7 +74,7 @@ public class PersonTest {
 
     @Test // hamcrest
     public void test7(){
-        assertThat(person.NewName(), endsWith("bin"));
+        assertThat(person.NewName(), endsWith("myr"));
         System.out.println("=======================Test 7=======================");
     }
 

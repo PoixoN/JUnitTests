@@ -3,12 +3,12 @@ public class Person {
     int age;
     Person()
     {
-        name = "Jack";
+        name = "Lubomir";
         surname = null;
         age = 18;
     }
     void displayInfo(){
-        System.out.printf("Name: %s \t Surname: %s \tAge: %d\n", name,surname, age);
+        System.out.printf("Name: %s \t Surname: %s \tAge: %d\n", name, surname, age);
     }
 
     void newAge(){
@@ -27,7 +27,7 @@ public class Person {
             return false;}
     }
     String NewName(){
-        name = "Robin";
+        name = "Lubomyr";
         return name;
     }
     String NameSurname (String n, String s)
